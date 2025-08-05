@@ -31,42 +31,42 @@ export const foodCategories: FoodCategory[] = [
     dishes: ['Cazuela', 'Pastel de choclo', 'Porotos con riendas', 'Empanadas']
   },
   {
-    id: 'marisqueria',
+    id: 'marisqueria-caleta',
     name: 'Marisquería/Caleta',
     description: 'Frescos del mar directo a tu mesa',
     emoji: '🦐',
     dishes: ['Paila marina', 'Machas a la parmesana', 'Ceviche', 'Caldillo de congrio']
   },
   {
-    id: 'parrilla',
+    id: 'parrilla-steakhouse',
     name: 'Parrilla/Steakhouse',
     description: 'Carnes jugosas a la parrilla',
     emoji: '🥩',
     dishes: ['Asado', 'Bife de chorizo', 'Choripán', 'Provoleta']
   },
   {
-    id: 'sanguches',
+    id: 'sanguches-fuente-soda',
     name: 'Sánguches y Fuente de Soda',
     description: 'Clásicos de la fuente de soda chilena',
     emoji: '🥪',
     dishes: ['Barros Luco', 'Chacarero', 'Ave Palta', 'Lomito']
   },
   {
-    id: 'completos',
+    id: 'completos-chorrillanas',
     name: 'Completos y Chorrillanas',
     description: 'Los reyes del fast food criollo',
     emoji: '🌭',
     dishes: ['Completo Italiano', 'Chorrillana', 'Completo Dinamita', 'Papas Mayo']
   },
   {
-    id: 'picadas',
+    id: 'picadas-casera',
     name: 'Picadas/Cocina Casera',
     description: 'Como en casa, pero sin cocinar',
     emoji: '🍲',
     dishes: ['Menú del día', 'Guisos caseros', 'Lentejas', 'Estofado']
   },
   {
-    id: 'mapuche',
+    id: 'mapuche-patagonica',
     name: 'Cocina Mapuche/Patagónica',
     description: 'Sabores ancestrales del sur',
     emoji: '🍃',
@@ -115,7 +115,7 @@ export const foodCategories: FoodCategory[] = [
     dishes: ['Pad Thai', 'Curry rojo', 'Tom Yum', 'Massaman']
   },
   {
-    id: 'india',
+    id: 'india-pakistani',
     name: 'India/Pakistaní',
     description: 'Especias que despiertan los sentidos',
     emoji: '🍛',
@@ -129,7 +129,7 @@ export const foodCategories: FoodCategory[] = [
     dishes: ['Tacos', 'Burritos', 'Quesadillas', 'Guacamole']
   },
   {
-    id: 'arabe',
+    id: 'arabe-levantina',
     name: 'Árabe/Levantina',
     description: 'Sabores del Medio Oriente',
     emoji: '🥙',
@@ -143,84 +143,84 @@ export const foodCategories: FoodCategory[] = [
     dishes: ['Kebab', 'Dürüm', 'Baklava', 'Döner']
   },
   {
-    id: 'italiana',
+    id: 'italiana-trattoria',
     name: 'Italiana - Trattoria',
     description: 'Pasta fresca y amor italiano',
     emoji: '🍝',
     dishes: ['Pasta carbonara', 'Lasagna', 'Risotto', 'Gnocchi']
   },
   {
-    id: 'pizzeria',
+    id: 'pizzeria-napolitana',
     name: 'Pizzería Napolitana',
     description: 'La vera pizza italiana',
     emoji: '🍕',
     dishes: ['Pizza Margherita', 'Quattro stagioni', 'Prosciutto', 'Calzone']
   },
   {
-    id: 'espanola',
+    id: 'espanola-tapas',
     name: 'Española - Tapas',
     description: 'Pequeños platos, grandes sabores',
     emoji: '🥘',
     dishes: ['Paella', 'Jamón ibérico', 'Patatas bravas', 'Gazpacho']
   },
   {
-    id: 'francesa',
+    id: 'francesa-bistro',
     name: 'Francesa - Bistró',
     description: 'Elegancia culinaria francesa',
     emoji: '🥖',
     dishes: ['Coq au vin', 'Ratatouille', 'Croissant', 'Bouillabaisse']
   },
   {
-    id: 'alemana',
+    id: 'alemana-cerveceria',
     name: 'Alemana/Cervecería',
     description: 'Tradición bávara con cerveza',
     emoji: '🍺',
     dishes: ['Bratwurst', 'Schnitzel', 'Pretzel', 'Sauerkraut']
   },
   {
-    id: 'brasilena',
+    id: 'brasilena-rodizio',
     name: 'Brasileña - Rodizio',
     description: 'Carnes infinitas del Brasil',
     emoji: '🇧🇷',
     dishes: ['Picanha', 'Feijoada', 'Caipirinha', 'Açaí']
   },
   {
-    id: 'venezolana',
+    id: 'venezolana-colombiana',
     name: 'Venezolana/Colombiana',
     description: 'Sabores tropicales hermanos',
     emoji: '🌴',
     dishes: ['Arepas', 'Patacones', 'Tequeños', 'Bandeja paisa']
   },
   {
-    id: 'americana',
+    id: 'americana-bbq',
     name: 'Americana - BBQ',
     description: 'El sueño americano en tu plato',
     emoji: '🍔',
     dishes: ['Hamburguesa', 'BBQ ribs', 'Mac and cheese', 'Wings']
   },
   {
-    id: 'veggie',
+    id: 'veggie-vegana',
     name: 'Veggie/Vegana',
     description: 'Plant-based y delicioso',
     emoji: '🌱',
     dishes: ['Buddha bowl', 'Quinoa', 'Tofu', 'Smoothie bowl']
   },
   {
-    id: 'saludable',
+    id: 'saludable-fit',
     name: 'Saludable/Fit',
     description: 'Nutritivo y sabroso',
     emoji: '🥗',
     dishes: ['Poke bowl', 'Ensaladas', 'Wraps', 'Smoothies']
   },
   {
-    id: 'brunch',
+    id: 'brunch-cafeteria',
     name: 'Brunch y Cafetería',
     description: 'El mejor momento del día',
     emoji: '☕',
     dishes: ['Avocado toast', 'Pancakes', 'Eggs Benedict', 'Café de especialidad']
   },
   {
-    id: 'pasteleria',
+    id: 'pasteleria-heladeria',
     name: 'Pastelería/Heladería',
     description: 'Dulces tentaciones',
     emoji: '🍰',
@@ -245,37 +245,37 @@ export const dailyQuestions: Question[] = [
         id: 'carne',
         text: 'Carne',
         emoji: '🥩',
-        categories: ['parrilla', 'chilena-tradicional', 'alemana', 'brasilena', 'americana']
+        categories: ['parrilla-steakhouse', 'chilena-tradicional', 'alemana-cerveceria', 'brasilena-rodizio', 'americana-bbq']
       },
       {
         id: 'mariscos',
         text: 'Mariscos',
         emoji: '🦐',
-        categories: ['marisqueria', 'peruana', 'nikkei', 'japonesa']
+        categories: ['marisqueria-caleta', 'peruana', 'nikkei', 'japonesa']
       },
       {
         id: 'vegetariano',
         text: 'Vegetariano',
         emoji: '🌱',
-        categories: ['veggie', 'saludable', 'india', 'tailandesa']
+        categories: ['veggie-vegana', 'saludable-fit', 'india-pakistani', 'tailandesa']
       },
       {
         id: 'tradicional',
         text: 'Comida tradicional',
         emoji: '🍲',
-        categories: ['chilena-tradicional', 'mapuche', 'picadas']
+        categories: ['chilena-tradicional', 'mapuche-patagonica', 'picadas-casera']
       },
       {
         id: 'internacional',
         text: 'Algo internacional',
         emoji: '🌍',
-        categories: ['japonesa', 'italiana', 'mexicana', 'china', 'coreana', 'tailandesa', 'india', 'arabe', 'francesa']
+        categories: ['japonesa', 'italiana-trattoria', 'mexicana', 'china', 'coreana', 'tailandesa', 'india-pakistani', 'arabe-levantina', 'francesa-bistro']
       },
       {
         id: 'rapido',
         text: 'Algo rápido',
         emoji: '⚡',
-        categories: ['sanguches', 'completos', 'americana', 'pizzeria']
+        categories: ['sanguches-fuente-soda', 'completos-chorrillanas', 'americana-bbq', 'pizzeria-napolitana']
       }
     ]
   },
@@ -287,25 +287,25 @@ export const dailyQuestions: Question[] = [
         id: 'infinito',
         text: 'Infinito :DD',
         emoji: '💕',
-        categories: ['autor', 'francesa', 'italiana', 'japonesa', 'nikkei']
+        categories: ['autor', 'francesa-bistro', 'italiana-trattoria', 'japonesa', 'nikkei']
       },
       {
         id: 'mucho',
         text: 'Mucho :)',
         emoji: '💖',
-        categories: ['parrilla', 'marisqueria', 'brasilena', 'espanola', 'peruana']
+        categories: ['parrilla-steakhouse', 'marisqueria-caleta', 'brasilena-rodizio', 'espanola-tapas', 'peruana']
       },
       {
         id: 'poquito',
         text: 'Poquito :/',
         emoji: '💛',
-        categories: ['sanguches', 'completos', 'picadas', 'americana', 'pizzeria']
+        categories: ['sanguches-fuente-soda', 'completos-chorrillanas', 'picadas-casera', 'americana-bbq', 'pizzeria-napolitana']
       },
       {
         id: 'nada',
         text: 'Nada :(',
         emoji: '💔',
-        categories: ['veggie', 'saludable', 'brunch', 'pasteleria']
+        categories: ['veggie-vegana', 'saludable-fit', 'brunch-cafeteria', 'pasteleria-heladeria']
       }
     ]
   },
@@ -317,37 +317,37 @@ export const dailyQuestions: Question[] = [
         id: 'picante',
         text: 'Con ganas de picante',
         emoji: '🌶️',
-        categories: ['mexicana', 'tailandesa', 'india', 'coreana']
+        categories: ['mexicana', 'tailandesa', 'india-pakistani', 'coreana']
       },
       {
         id: 'comfort',
         text: 'Necesito comfort food',
         emoji: '🤗',
-        categories: ['chilena-tradicional', 'picadas', 'italiana', 'americana']
+        categories: ['chilena-tradicional', 'picadas-casera', 'italiana-trattoria', 'americana-bbq']
       },
       {
         id: 'aventurero',
         text: 'Aventurero/a',
         emoji: '🎭',
-        categories: ['nikkei', 'autor', 'tailandesa', 'coreana', 'mapuche']
+        categories: ['nikkei', 'autor', 'tailandesa', 'coreana', 'mapuche-patagonica']
       },
       {
         id: 'saludable',
         text: 'Cuidándome',
         emoji: '💪',
-        categories: ['saludable', 'veggie', 'japonesa', 'peruana']
+        categories: ['saludable-fit', 'veggie-vegana', 'japonesa', 'peruana']
       },
       {
         id: 'celebrando',
         text: 'De celebración',
         emoji: '🎉',
-        categories: ['parrilla', 'marisqueria', 'autor', 'brasilena', 'francesa']
+        categories: ['parrilla-steakhouse', 'marisqueria-caleta', 'autor', 'brasilena-rodizio', 'francesa-bistro']
       },
       {
         id: 'dulce',
         text: 'Antojado/a de dulce',
         emoji: '🍰',
-        categories: ['pasteleria', 'brunch']
+        categories: ['pasteleria-heladeria', 'brunch-cafeteria']
       }
     ]
   }
@@ -370,37 +370,37 @@ export const assistedQuestions: Question[] = [
         id: 'abrazo-casero',
         text: 'Abracito casero (calorcito + cariñito) 🧣',
         emoji: '🧣',
-        categories: ['chilena-tradicional', 'picadas', 'italiana', 'espanola']
+        categories: ['chilena-tradicional', 'picadas-casera', 'italiana-trattoria', 'espanola-tapas']
       },
       {
         id: 'costa-citrico',
         text: 'Brisa de mar con limoncito 🍋🌊',
         emoji: '🌊',
-        categories: ['marisqueria', 'peruana', 'nikkei']
+        categories: ['marisqueria-caleta', 'peruana', 'nikkei']
       },
       {
         id: 'fuego-humo',
         text: 'Modo dragóncito 🔥 (ahumado rico)',
         emoji: '🔥',
-        categories: ['parrilla', 'americana', 'brasilena', 'alemana']
+        categories: ['parrilla-steakhouse', 'americana-bbq', 'brasilena-rodizio', 'alemana-cerveceria']
       },
       {
         id: 'tour-asia',
         text: 'Pasaporte a Asia ✈️🍜',
         emoji: '🧭',
-        categories: ['china', 'japonesa', 'coreana', 'tailandesa', 'india']
+        categories: ['china', 'japonesa', 'coreana', 'tailandesa', 'india-pakistani']
       },
       {
         id: 'calle-antojo',
         text: 'Paseíto callejero (ñam express) 🚶',
         emoji: '🚶',
-        categories: ['sanguches', 'completos', 'mexicana', 'venezolana', 'turca', 'arabe', 'pizzeria']
+        categories: ['sanguches-fuente-soda', 'completos-chorrillanas', 'mexicana', 'venezolana-colombiana', 'turca', 'arabe-levantina', 'pizzeria-napolitana']
       },
       {
         id: 'dulce-brunch',
         text: 'Dulcecito & brunchito (mimi break) 🍰',
         emoji: '🍰',
-        categories: ['pasteleria', 'brunch', 'saludable', 'veggie']
+        categories: ['pasteleria-heladeria', 'brunch-cafeteria', 'saludable-fit', 'veggie-vegana']
       }
     ]
   },
@@ -412,31 +412,31 @@ export const assistedQuestions: Question[] = [
         id: 'rapido',
         text: '¡Rápido-rápido! (tengo hambrita) ⏱️',
         emoji: '⏱️',
-        categories: ['sanguches', 'completos', 'pizzeria', 'pasteleria']
+        categories: ['sanguches-fuente-soda', 'completos-chorrillanas', 'pizzeria-napolitana', 'pasteleria-heladeria']
       },
       {
         id: 'compartir',
         text: 'Para picotear juntitos 🧑‍🤝‍🧑',
         emoji: '🧑‍🤝‍🧑',
-        categories: ['espanola', 'arabe', 'turca', 'coreana', 'mexicana']
+        categories: ['espanola-tapas', 'arabe-levantina', 'turca', 'coreana', 'mexicana']
       },
       {
         id: 'manteles-largos',
         text: 'Plan elegante (wow wow) ✨',
         emoji: '✨',
-        categories: ['autor', 'francesa', 'nikkei', 'japonesa']
+        categories: ['autor', 'francesa-bistro', 'nikkei', 'japonesa']
       },
       {
         id: 'tenedor',
         text: 'Plato apañador (tenedor poderoso) 🍽️',
         emoji: '🍽️',
-        categories: ['chilena-tradicional', 'italiana', 'alemana', 'parrilla']
+        categories: ['chilena-tradicional', 'italiana-trattoria', 'alemana-cerveceria', 'parrilla-steakhouse']
       },
       {
         id: 'ligero',
         text: 'Ligero & fresco (panza feliz) 🌿',
         emoji: '🌿',
-        categories: ['saludable', 'veggie', 'peruana', 'marisqueria', 'nikkei']
+        categories: ['saludable-fit', 'veggie-vegana', 'peruana', 'marisqueria-caleta', 'nikkei']
       }
     ]
   },
