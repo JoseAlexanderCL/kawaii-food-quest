@@ -32,7 +32,7 @@ const Index = () => {
     if (mode === 'ruleta') {
       setCurrentState('ruleta');
     } else {
-      setCurrentState('question1');
+      setCurrentState('question-pololo');
       setCurrentQuestionIndex(0);
       setSelectedOptions([]);
     }
@@ -42,14 +42,14 @@ const Index = () => {
     const newSelectedOptions = [...selectedOptions];
 
     if (currentQuestionIndex === 0) {
-      newSelectedOptions[0] = optionId;
-      setSelectedOptions(newSelectedOptions);
-      setCurrentQuestionIndex(1);
-      setCurrentState('question-pololo');
-    } else if (currentQuestionIndex === 1) {
       if (optionId === 'nada') {
         alert('Haz matado a un pudú :(');
       }
+      newSelectedOptions[0] = optionId;
+      setSelectedOptions(newSelectedOptions);
+      setCurrentQuestionIndex(1);
+      setCurrentState('question1');
+    } else if (currentQuestionIndex === 1) {
       newSelectedOptions[1] = optionId;
       setSelectedOptions(newSelectedOptions);
       setCurrentQuestionIndex(2);
@@ -80,7 +80,7 @@ const Index = () => {
   };
 
   const handleSkipThirdQuestion = () => {
-    // Get recommendations with first two answers
+    // Get recommendations with first two answers (pololo and main preference)
     const categories = getRecommendedCategories([selectedOptions[0], selectedOptions[1]]);
     setRecommendedCategories(categories);
     setCurrentState('results');
@@ -175,13 +175,13 @@ const Index = () => {
         <div className="max-w-2xl mx-auto pt-8">
           <KawaiiHeader 
             showLogo={false}
-            title="Pregunta 1 de 3"
+            title="Pregunta 2 de 3"
             subtitle="¡Vamos a encontrar tu comida perfecta!"
           />
           
           <QuestionCard
             question={todaysQuestion}
-            selectedOption={selectedOptions[0]}
+            selectedOption={selectedOptions[1]}
             onOptionSelect={handleOptionSelect}
           />
           
@@ -205,13 +205,13 @@ const Index = () => {
         <div className="max-w-2xl mx-auto pt-8">
           <KawaiiHeader 
             showLogo={false}
-            title="Pregunta especial 💕"
+            title="Pregunta 1 de 3 💕"
             subtitle="¡Una preguntita importante!"
           />
           
           <QuestionCard
             question={dailyQuestions[1]} // La pregunta del pololo
-            selectedOption={selectedOptions[1]}
+            selectedOption={selectedOptions[0]}
             onOptionSelect={handleOptionSelect}
           />
           
