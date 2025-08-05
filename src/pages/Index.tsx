@@ -4,7 +4,7 @@ import { QuestionCard } from "@/components/QuestionCard";
 import { CategoryCard } from "@/components/CategoryCard";
 import { KawaiiButton } from "@/components/KawaiiButton";
 import { KawaiiRuleta } from "@/components/KawaiiRuleta";
-import { assistedQuestions, FoodCategory } from "@/data/questions";
+import { assistedQuestions, FoodCategory, foodCategories } from "@/data/questions";
 import { recommendTop3 } from "@/lib/recommend";
 import { RotateCcw, ChefHat, Dice6, Heart } from "lucide-react";
 
@@ -14,7 +14,7 @@ type AppMode = 'ruleta' | 'asistido';
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('welcome');
   const [appMode, setAppMode] = useState<AppMode | null>(null);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [recommendedCategories, setRecommendedCategories] = useState<FoodCategory[]>([]);
 
@@ -28,26 +28,29 @@ const Index = () => {
       setCurrentState('ruleta');
     } else {
       setCurrentQuestionIndex(0);
-      setSelectedOptions([]);
+      setSelectedAnswers({});
       setCurrentState('question');
     }
   };
 
   const handleOptionSelect = (optionId: string) => {
-    const newSelectedOptions = [...selectedOptions];
+    const questionId = assistedQuestions[currentQuestionIndex].id;
 
     if (currentQuestionIndex === 0 && optionId === 'nada') {
       alert('Haz matado a un pudú :(');
     }
 
-    newSelectedOptions[currentQuestionIndex] = optionId;
-    setSelectedOptions(newSelectedOptions);
+    const newSelectedAnswers = { ...selectedAnswers, [questionId]: optionId };
+    setSelectedAnswers(newSelectedAnswers);
 
     const nextIndex = currentQuestionIndex + 1;
     if (nextIndex < assistedQuestions.length) {
       setCurrentQuestionIndex(nextIndex);
     } else {
-      const categories = recommendTop3(newSelectedOptions);
+      const categoryIds = recommendTop3(newSelectedAnswers, assistedQuestions);
+      const categories = categoryIds
+        .map((id) => foodCategories.find((c) => c.id === id))
+        .filter(Boolean) as FoodCategory[];
       setRecommendedCategories(categories);
       setCurrentState('results');
     }
@@ -61,13 +64,16 @@ const Index = () => {
   const handleReset = () => {
     setCurrentState('welcome');
     setAppMode(null);
-    setSelectedOptions([]);
+    setSelectedAnswers({});
     setCurrentQuestionIndex(0);
     setRecommendedCategories([]);
   };
 
   const handleSkipLastQuestion = () => {
-    const categories = recommendTop3(selectedOptions.slice(0, currentQuestionIndex));
+    const categoryIds = recommendTop3(selectedAnswers, assistedQuestions);
+    const categories = categoryIds
+      .map((id) => foodCategories.find((c) => c.id === id))
+      .filter(Boolean) as FoodCategory[];
     setRecommendedCategories(categories);
     setCurrentState('results');
   };
@@ -172,7 +178,7 @@ const Index = () => {
 
           <QuestionCard
             question={currentQuestion}
-            selectedOption={selectedOptions[currentQuestionIndex]}
+            selectedOption={selectedAnswers[currentQuestion.id]}
             onOptionSelect={handleOptionSelect}
           />
 
