@@ -7,7 +7,7 @@ import { KawaiiRuleta } from "@/components/KawaiiRuleta";
 import { getTodaysQuestion, getRecommendedCategories, dailyQuestions, FoodCategory } from "@/data/questions";
 import { RotateCcw, ChefHat, Dice6, Heart } from "lucide-react";
 
-type AppState = 'welcome' | 'mode-selection' | 'ruleta' | 'question1' | 'question-pololo' | 'question2' | 'results';
+type AppState = 'welcome' | 'mode-selection' | 'ruleta' | 'question' | 'results';
 type AppMode = 'ruleta' | 'asistido';
 
 const Index = () => {
@@ -17,6 +17,7 @@ const Index = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [recommendedCategories, setRecommendedCategories] = useState<FoodCategory[]>([]);
   const [todaysQuestion, setTodaysQuestion] = useState(getTodaysQuestion());
+  const assistedQuestions = [dailyQuestions[1], todaysQuestion, dailyQuestions[2]];
 
   useEffect(() => {
     // TODO: In a real app, this would update daily based on server time or stored date
@@ -32,33 +33,26 @@ const Index = () => {
     if (mode === 'ruleta') {
       setCurrentState('ruleta');
     } else {
-      setCurrentState('question-pololo');
       setCurrentQuestionIndex(0);
       setSelectedOptions([]);
+      setCurrentState('question');
     }
   };
 
   const handleOptionSelect = (optionId: string) => {
     const newSelectedOptions = [...selectedOptions];
 
-    if (currentQuestionIndex === 0) {
-      if (optionId === 'nada') {
-        alert('Haz matado a un pudú :(');
-      }
-      newSelectedOptions[0] = optionId;
-      setSelectedOptions(newSelectedOptions);
-      setCurrentQuestionIndex(1);
-      setCurrentState('question1');
-    } else if (currentQuestionIndex === 1) {
-      newSelectedOptions[1] = optionId;
-      setSelectedOptions(newSelectedOptions);
-      setCurrentQuestionIndex(2);
-      setCurrentState('question2');
+    if (currentQuestionIndex === 0 && optionId === 'nada') {
+      alert('Haz matado a un pudú :(');
+    }
+
+    newSelectedOptions[currentQuestionIndex] = optionId;
+    setSelectedOptions(newSelectedOptions);
+
+    const nextIndex = currentQuestionIndex + 1;
+    if (nextIndex < assistedQuestions.length) {
+      setCurrentQuestionIndex(nextIndex);
     } else {
-      newSelectedOptions[2] = optionId;
-      setSelectedOptions(newSelectedOptions);
-      
-      // Get recommendations
       const categories = getRecommendedCategories(newSelectedOptions);
       setRecommendedCategories(categories);
       setCurrentState('results');
@@ -80,8 +74,7 @@ const Index = () => {
   };
 
   const handleSkipThirdQuestion = () => {
-    // Get recommendations with first two answers (pololo and main preference)
-    const categories = getRecommendedCategories([selectedOptions[0], selectedOptions[1]]);
+    const categories = getRecommendedCategories(selectedOptions.slice(0, currentQuestionIndex));
     setRecommendedCategories(categories);
     setCurrentState('results');
   };
@@ -169,97 +162,54 @@ const Index = () => {
     );
   }
 
-  if (currentState === 'question1') {
-    return (
-      <div className="min-h-screen bg-gradient-kawaii p-4">
-        <div className="max-w-2xl mx-auto pt-8">
-          <KawaiiHeader 
-            showLogo={false}
-            title="Pregunta 2 de 3"
-            subtitle="¡Vamos a encontrar tu comida perfecta!"
-          />
-          
-          <QuestionCard
-            question={todaysQuestion}
-            selectedOption={selectedOptions[1]}
-            onOptionSelect={handleOptionSelect}
-          />
-          
-          <div className="text-center mt-6">
-            <KawaiiButton
-              variant="outline"
-              onClick={handleReset}
-            >
-              <RotateCcw className="w-4 h-4 mr-2" />
-              Empezar de nuevo
-            </KawaiiButton>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (currentState === 'question') {
+    const totalQuestions = assistedQuestions.length;
+    const currentQuestion = assistedQuestions[currentQuestionIndex];
+    const isFirst = currentQuestionIndex === 0;
+    const isLast = currentQuestionIndex === totalQuestions - 1;
 
-  if (currentState === 'question-pololo') {
     return (
       <div className="min-h-screen bg-gradient-kawaii p-4">
         <div className="max-w-2xl mx-auto pt-8">
-          <KawaiiHeader 
+          <KawaiiHeader
             showLogo={false}
-            title="Pregunta 1 de 3 💕"
-            subtitle="¡Una preguntita importante!"
+            title={`Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}${isFirst ? ' 💕' : ''}`}
+            subtitle={isFirst ? '¡Una preguntita importante!' : isLast ? '¡Última pregunta!' : '¡Vamos a encontrar tu comida perfecta!'}
           />
-          
-          <QuestionCard
-            question={dailyQuestions[1]} // La pregunta del pololo
-            selectedOption={selectedOptions[0]}
-            onOptionSelect={handleOptionSelect}
-          />
-          
-          <div className="text-center mt-6">
-            <KawaiiButton
-              variant="outline"
-              onClick={handleReset}
-            >
-              <RotateCcw className="w-4 h-4 mr-2" />
-              Empezar de nuevo
-            </KawaiiButton>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
-  if (currentState === 'question2') {
-    return (
-      <div className="min-h-screen bg-gradient-kawaii p-4">
-        <div className="max-w-2xl mx-auto pt-8">
-          <KawaiiHeader 
-            showLogo={false}
-            title="Pregunta 3 de 3"
-            subtitle="¡Última pregunta!"
-          />
-          
           <QuestionCard
-            question={dailyQuestions[2]} // La pregunta del mood
-            selectedOption={selectedOptions[2]}
+            question={currentQuestion}
+            selectedOption={selectedOptions[currentQuestionIndex]}
             onOptionSelect={handleOptionSelect}
           />
-          
-          <div className="text-center mt-6 space-x-4">
-            <KawaiiButton
-              variant="secondary"
-              onClick={handleSkipThirdQuestion}
-            >
-              Omitir
-            </KawaiiButton>
-            
-            <KawaiiButton
-              variant="outline"
-              onClick={handleReset}
-            >
-              <RotateCcw className="w-4 h-4 mr-2" />
-              Empezar de nuevo
-            </KawaiiButton>
+
+          <div className="text-center mt-6">
+            {isLast ? (
+              <div className="space-x-4">
+                <KawaiiButton
+                  variant="secondary"
+                  onClick={handleSkipThirdQuestion}
+                >
+                  Omitir
+                </KawaiiButton>
+
+                <KawaiiButton
+                  variant="outline"
+                  onClick={handleReset}
+                >
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Empezar de nuevo
+                </KawaiiButton>
+              </div>
+            ) : (
+              <KawaiiButton
+                variant="outline"
+                onClick={handleReset}
+              >
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Empezar de nuevo
+              </KawaiiButton>
+            )}
           </div>
         </div>
       </div>
