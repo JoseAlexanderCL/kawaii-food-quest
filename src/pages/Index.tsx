@@ -4,7 +4,8 @@ import { QuestionCard } from "@/components/QuestionCard";
 import { CategoryCard } from "@/components/CategoryCard";
 import { KawaiiButton } from "@/components/KawaiiButton";
 import { KawaiiRuleta } from "@/components/KawaiiRuleta";
-import { assistedQuestions, getRecommendedCategories, FoodCategory } from "@/data/questions";
+import { assistedQuestions, FoodCategory } from "@/data/questions";
+import { recommendTop3 } from "@/lib/recommend";
 import { RotateCcw, ChefHat, Dice6, Heart } from "lucide-react";
 
 type AppState = 'welcome' | 'mode-selection' | 'ruleta' | 'question' | 'results';
@@ -46,7 +47,7 @@ const Index = () => {
     if (nextIndex < assistedQuestions.length) {
       setCurrentQuestionIndex(nextIndex);
     } else {
-      const categories = getRecommendedCategories(newSelectedOptions);
+      const categories = recommendTop3(newSelectedOptions);
       setRecommendedCategories(categories);
       setCurrentState('results');
     }
@@ -66,7 +67,7 @@ const Index = () => {
   };
 
   const handleSkipLastQuestion = () => {
-    const categories = getRecommendedCategories(selectedOptions.slice(0, currentQuestionIndex));
+    const categories = recommendTop3(selectedOptions.slice(0, currentQuestionIndex));
     setRecommendedCategories(categories);
     setCurrentState('results');
   };
