@@ -280,6 +280,36 @@ export const dailyQuestions: Question[] = [
     ]
   },
   {
+    id: 'pololo-preference',
+    text: '¿Cuánto amas a tu pololo?',
+    options: [
+      {
+        id: 'infinito',
+        text: 'Infinito :DD',
+        emoji: '💕',
+        categories: ['autor', 'francesa', 'italiana', 'japonesa', 'nikkei']
+      },
+      {
+        id: 'mucho',
+        text: 'Mucho :)',
+        emoji: '💖',
+        categories: ['parrilla', 'marisqueria', 'brasilena', 'espanola', 'peruana']
+      },
+      {
+        id: 'poquito',
+        text: 'Poquito :/',
+        emoji: '💛',
+        categories: ['sanguches', 'completos', 'picadas', 'americana', 'pizzeria']
+      },
+      {
+        id: 'nada',
+        text: 'Nada :(',
+        emoji: '💔',
+        categories: ['veggie', 'saludable', 'brunch', 'pasteleria']
+      }
+    ]
+  },
+  {
     id: 'mood-preference',
     text: '¿Cómo te sientes hoy?',
     options: [

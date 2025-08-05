@@ -31,10 +31,15 @@ All colors MUST be HSL.
     --accent-foreground: 342 15% 15%;
 
     --kawaii-pink: 320 100% 90%; /* Baby pink */
+    --kawaii-baby-pink: 320 100% 95%; /* Baby pink */
     --kawaii-blue: 195 100% 85%; /* Soft blue */
+    --kawaii-soft-blue: 195 100% 90%; /* Soft blue */
     --kawaii-mint: 165 60% 85%; /* Mint green */
+    --kawaii-mint-green: 165 60% 90%; /* Mint green */
     --kawaii-yellow: 60 100% 90%; /* Pale yellow */
+    --kawaii-pale-yellow: 60 100% 95%; /* Pale yellow */
     --kawaii-lavender: 270 60% 90%; /* Lavender */
+    --kawaii-peach: 20 100% 90%; /* Peach */
     --kawaii-crimson: 346 82% 57%; /* Spanish Crimson */
     --kawaii-vivid-yellow: 60 100% 68%; /* Vivid Yellow */
 
@@ -150,5 +155,9 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .duration-3000 {
+    transition-duration: 3000ms;
   }
 }

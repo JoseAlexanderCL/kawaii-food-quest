@@ -3,13 +3,16 @@ import { KawaiiHeader } from "@/components/KawaiiHeader";
 import { QuestionCard } from "@/components/QuestionCard";
 import { CategoryCard } from "@/components/CategoryCard";
 import { KawaiiButton } from "@/components/KawaiiButton";
+import { KawaiiRuleta } from "@/components/KawaiiRuleta";
 import { getTodaysQuestion, getRecommendedCategories, dailyQuestions, FoodCategory } from "@/data/questions";
-import { RotateCcw, ChefHat } from "lucide-react";
+import { RotateCcw, ChefHat, Dice6, Heart } from "lucide-react";
 
-type AppState = 'welcome' | 'question1' | 'question2' | 'results';
+type AppState = 'welcome' | 'mode-selection' | 'ruleta' | 'question1' | 'question-pololo' | 'question2' | 'results';
+type AppMode = 'ruleta' | 'asistido';
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('welcome');
+  const [appMode, setAppMode] = useState<AppMode | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [recommendedCategories, setRecommendedCategories] = useState<FoodCategory[]>([]);
@@ -20,10 +23,19 @@ const Index = () => {
     setTodaysQuestion(getTodaysQuestion());
   }, []);
 
-  const handleStartQuestions = () => {
-    setCurrentState('question1');
-    setCurrentQuestionIndex(0);
-    setSelectedOptions([]);
+  const handleStartApp = () => {
+    setCurrentState('mode-selection');
+  };
+
+  const handleModeSelection = (mode: AppMode) => {
+    setAppMode(mode);
+    if (mode === 'ruleta') {
+      setCurrentState('ruleta');
+    } else {
+      setCurrentState('question1');
+      setCurrentQuestionIndex(0);
+      setSelectedOptions([]);
+    }
   };
 
   const handleOptionSelect = (optionId: string) => {
@@ -33,9 +45,14 @@ const Index = () => {
       newSelectedOptions[0] = optionId;
       setSelectedOptions(newSelectedOptions);
       setCurrentQuestionIndex(1);
+      setCurrentState('question-pololo');
+    } else if (currentQuestionIndex === 1) {
+      newSelectedOptions[1] = optionId;
+      setSelectedOptions(newSelectedOptions);
+      setCurrentQuestionIndex(2);
       setCurrentState('question2');
     } else {
-      newSelectedOptions[1] = optionId;
+      newSelectedOptions[2] = optionId;
       setSelectedOptions(newSelectedOptions);
       
       // Get recommendations
@@ -45,18 +62,23 @@ const Index = () => {
     }
   };
 
+  const handleRuletaResult = (category: FoodCategory) => {
+    setRecommendedCategories([category]);
+    setCurrentState('results');
+  };
+
   const handleReset = () => {
     setCurrentState('welcome');
+    setAppMode(null);
     setSelectedOptions([]);
     setCurrentQuestionIndex(0);
     setRecommendedCategories([]);
-    // TODO: In a real app, this could fetch a new question or rotate to the next one
     setTodaysQuestion(getTodaysQuestion());
   };
 
-  const handleSkipSecondQuestion = () => {
-    // Get recommendations with only first answer
-    const categories = getRecommendedCategories([selectedOptions[0]]);
+  const handleSkipThirdQuestion = () => {
+    // Get recommendations with first two answers
+    const categories = getRecommendedCategories([selectedOptions[0], selectedOptions[1]]);
     setRecommendedCategories(categories);
     setCurrentState('results');
   };
@@ -71,7 +93,7 @@ const Index = () => {
             <KawaiiButton
               variant="primary"
               size="lg"
-              onClick={handleStartQuestions}
+              onClick={handleStartApp}
               className="animate-kawaii-bounce"
             >
               <ChefHat className="w-5 h-5 mr-2" />
@@ -83,13 +105,74 @@ const Index = () => {
     );
   }
 
+  if (currentState === 'mode-selection') {
+    return (
+      <div className="min-h-screen bg-gradient-kawaii p-4 flex items-center justify-center">
+        <div className="max-w-md mx-auto">
+          <KawaiiHeader 
+            showLogo={false}
+            title="¿Cómo quieres decidir?"
+            subtitle="Elige tu modo favorito"
+          />
+          
+          <div className="space-y-4">
+            <KawaiiButton
+              variant="kawaii"
+              size="lg"
+              onClick={() => handleModeSelection('ruleta')}
+              className="w-full h-auto py-6 flex flex-col items-center gap-3"
+            >
+              <Dice6 className="w-8 h-8" />
+              <div className="text-center">
+                <div className="font-bold text-lg">Ruleta All in</div>
+                <div className="text-sm opacity-80">¡Deja que la suerte decida!</div>
+              </div>
+            </KawaiiButton>
+
+            <KawaiiButton
+              variant="kawaii"
+              size="lg"
+              onClick={() => handleModeSelection('asistido')}
+              className="w-full h-auto py-6 flex flex-col items-center gap-3"
+            >
+              <Heart className="w-8 h-8" />
+              <div className="text-center">
+                <div className="font-bold text-lg">Modo Asistido</div>
+                <div className="text-sm opacity-80">Te ayudo con preguntas</div>
+              </div>
+            </KawaiiButton>
+          </div>
+
+          <div className="text-center mt-6">
+            <KawaiiButton
+              variant="outline"
+              onClick={handleReset}
+            >
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Volver
+            </KawaiiButton>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentState === 'ruleta') {
+    return (
+      <KawaiiRuleta 
+        onResult={handleRuletaResult}
+        onReset={handleReset}
+      />
+    );
+  }
+
   if (currentState === 'question1') {
     return (
       <div className="min-h-screen bg-gradient-kawaii p-4">
         <div className="max-w-2xl mx-auto pt-8">
           <KawaiiHeader 
             showLogo={false}
-            title="Pregunta 1 de 2"
+            title="Pregunta 1 de 3"
             subtitle="¡Vamos a encontrar tu comida perfecta!"
           />
           
@@ -113,26 +196,56 @@ const Index = () => {
     );
   }
 
+  if (currentState === 'question-pololo') {
+    return (
+      <div className="min-h-screen bg-gradient-kawaii p-4">
+        <div className="max-w-2xl mx-auto pt-8">
+          <KawaiiHeader 
+            showLogo={false}
+            title="Pregunta especial 💕"
+            subtitle="¡Una preguntita importante!"
+          />
+          
+          <QuestionCard
+            question={dailyQuestions[1]} // La pregunta del pololo
+            selectedOption={selectedOptions[1]}
+            onOptionSelect={handleOptionSelect}
+          />
+          
+          <div className="text-center mt-6">
+            <KawaiiButton
+              variant="outline"
+              onClick={handleReset}
+            >
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Empezar de nuevo
+            </KawaiiButton>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (currentState === 'question2') {
     return (
       <div className="min-h-screen bg-gradient-kawaii p-4">
         <div className="max-w-2xl mx-auto pt-8">
           <KawaiiHeader 
             showLogo={false}
-            title="Pregunta 2 de 2"
-            subtitle="¡Casi listo! Una preguntita más..."
+            title="Pregunta 3 de 3"
+            subtitle="¡Última pregunta!"
           />
           
           <QuestionCard
-            question={dailyQuestions[1]}
-            selectedOption={selectedOptions[1]}
+            question={dailyQuestions[2]} // La pregunta del mood
+            selectedOption={selectedOptions[2]}
             onOptionSelect={handleOptionSelect}
           />
           
           <div className="text-center mt-6 space-x-4">
             <KawaiiButton
               variant="secondary"
-              onClick={handleSkipSecondQuestion}
+              onClick={handleSkipThirdQuestion}
             >
               Omitir
             </KawaiiButton>
