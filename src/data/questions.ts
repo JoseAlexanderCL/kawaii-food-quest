@@ -287,25 +287,25 @@ export const dailyQuestions: Question[] = [
         id: 'infinito',
         text: 'Infinito :DD',
         emoji: '💕',
-        categories: ['autor', 'francesa-bistro', 'italiana-trattoria', 'japonesa', 'nikkei']
+        categories: ['saludable-fit']
       },
       {
         id: 'mucho',
         text: 'Mucho :)',
         emoji: '💖',
-        categories: ['parrilla-steakhouse', 'marisqueria-caleta', 'brasilena-rodizio', 'espanola-tapas', 'peruana']
+        categories: ['saludable-fit']
       },
       {
         id: 'poquito',
         text: 'Poquito :/',
         emoji: '💛',
-        categories: ['sanguches-fuente-soda', 'completos-chorrillanas', 'picadas-casera', 'americana-bbq', 'pizzeria-napolitana']
+        categories: ['saludable-fit']
       },
       {
         id: 'nada',
         text: 'Nada :(',
         emoji: '💔',
-        categories: ['veggie-vegana', 'saludable-fit', 'brunch-cafeteria', 'pasteleria-heladeria']
+        categories: []
       }
     ]
   },
