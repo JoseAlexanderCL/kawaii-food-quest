@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { KawaiiHeader } from "@/components/KawaiiHeader";
 import { QuestionCard } from "@/components/QuestionCard";
 import { CategoryCard } from "@/components/CategoryCard";
 import { KawaiiButton } from "@/components/KawaiiButton";
 import { KawaiiRuleta } from "@/components/KawaiiRuleta";
-import { getTodaysQuestion, getRecommendedCategories, dailyQuestions, FoodCategory } from "@/data/questions";
+import { assistedQuestions, getRecommendedCategories, FoodCategory } from "@/data/questions";
 import { RotateCcw, ChefHat, Dice6, Heart } from "lucide-react";
 
 type AppState = 'welcome' | 'mode-selection' | 'ruleta' | 'question' | 'results';
@@ -16,13 +16,6 @@ const Index = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [recommendedCategories, setRecommendedCategories] = useState<FoodCategory[]>([]);
-  const [todaysQuestion, setTodaysQuestion] = useState(getTodaysQuestion());
-  const assistedQuestions = [dailyQuestions[1], todaysQuestion, dailyQuestions[2]];
-
-  useEffect(() => {
-    // TODO: In a real app, this would update daily based on server time or stored date
-    setTodaysQuestion(getTodaysQuestion());
-  }, []);
 
   const handleStartApp = () => {
     setCurrentState('mode-selection');
@@ -70,10 +63,9 @@ const Index = () => {
     setSelectedOptions([]);
     setCurrentQuestionIndex(0);
     setRecommendedCategories([]);
-    setTodaysQuestion(getTodaysQuestion());
   };
 
-  const handleSkipThirdQuestion = () => {
+  const handleSkipLastQuestion = () => {
     const categories = getRecommendedCategories(selectedOptions.slice(0, currentQuestionIndex));
     setRecommendedCategories(categories);
     setCurrentState('results');
@@ -188,7 +180,7 @@ const Index = () => {
               <div className="space-x-4">
                 <KawaiiButton
                   variant="secondary"
-                  onClick={handleSkipThirdQuestion}
+                  onClick={handleSkipLastQuestion}
                 >
                   Omitir
                 </KawaiiButton>
