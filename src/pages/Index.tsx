@@ -40,13 +40,16 @@ const Index = () => {
 
   const handleOptionSelect = (optionId: string) => {
     const newSelectedOptions = [...selectedOptions];
-    
+
     if (currentQuestionIndex === 0) {
       newSelectedOptions[0] = optionId;
       setSelectedOptions(newSelectedOptions);
       setCurrentQuestionIndex(1);
       setCurrentState('question-pololo');
     } else if (currentQuestionIndex === 1) {
+      if (optionId === 'nada') {
+        alert('Haz matado a un pudú :(');
+      }
       newSelectedOptions[1] = optionId;
       setSelectedOptions(newSelectedOptions);
       setCurrentQuestionIndex(2);
