@@ -359,12 +359,108 @@ export const getTodaysQuestion = (): Question => {
   return dailyQuestions[today % dailyQuestions.length];
 };
 
+// Questions for the assisted mode flow (pololo question + extra questions)
+export const assistedQuestions: Question[] = [
+  dailyQuestions[1],
+  {
+    id: 'aventura',
+    text: '¿Qué aventura culinaria te hace ojitos hoy? (｡◕‿◕｡)',
+    options: [
+      {
+        id: 'abrazo-casero',
+        text: 'Abracito casero (calorcito + cariñito) 🧣',
+        emoji: '🧣',
+        categories: ['chilena-tradicional', 'picadas', 'italiana', 'espanola']
+      },
+      {
+        id: 'costa-citrico',
+        text: 'Brisa de mar con limoncito 🍋🌊',
+        emoji: '🌊',
+        categories: ['marisqueria', 'peruana', 'nikkei']
+      },
+      {
+        id: 'fuego-humo',
+        text: 'Modo dragóncito 🔥 (ahumado rico)',
+        emoji: '🔥',
+        categories: ['parrilla', 'americana', 'brasilena', 'alemana']
+      },
+      {
+        id: 'tour-asia',
+        text: 'Pasaporte a Asia ✈️🍜',
+        emoji: '🧭',
+        categories: ['china', 'japonesa', 'coreana', 'tailandesa', 'india']
+      },
+      {
+        id: 'calle-antojo',
+        text: 'Paseíto callejero (ñam express) 🚶',
+        emoji: '🚶',
+        categories: ['sanguches', 'completos', 'mexicana', 'venezolana', 'turca', 'arabe', 'pizzeria']
+      },
+      {
+        id: 'dulce-brunch',
+        text: 'Dulcecito & brunchito (mimi break) 🍰',
+        emoji: '🍰',
+        categories: ['pasteleria', 'brunch', 'saludable', 'veggie']
+      }
+    ]
+  },
+  {
+    id: 'formato',
+    text: '¿Cómo quieren vivir este antojito hoy? ✨',
+    options: [
+      {
+        id: 'rapido',
+        text: '¡Rápido-rápido! (tengo hambrita) ⏱️',
+        emoji: '⏱️',
+        categories: ['sanguches', 'completos', 'pizzeria', 'pasteleria']
+      },
+      {
+        id: 'compartir',
+        text: 'Para picotear juntitos 🧑‍🤝‍🧑',
+        emoji: '🧑‍🤝‍🧑',
+        categories: ['espanola', 'arabe', 'turca', 'coreana', 'mexicana']
+      },
+      {
+        id: 'manteles-largos',
+        text: 'Plan elegante (wow wow) ✨',
+        emoji: '✨',
+        categories: ['autor', 'francesa', 'nikkei', 'japonesa']
+      },
+      {
+        id: 'tenedor',
+        text: 'Plato apañador (tenedor poderoso) 🍽️',
+        emoji: '🍽️',
+        categories: ['chilena-tradicional', 'italiana', 'alemana', 'parrilla']
+      },
+      {
+        id: 'ligero',
+        text: 'Ligero & fresco (panza feliz) 🌿',
+        emoji: '🌿',
+        categories: ['saludable', 'veggie', 'peruana', 'marisqueria', 'nikkei']
+      }
+    ]
+  },
+  {
+    id: 'no-quiero',
+    text: 'Cuéntame un “no-no” de hoy 🙈 (opcional)',
+    options: [
+      { id: 'no-mariscos', text: 'Sin marisquitos hoy, porfi 🐟', emoji: '🐟', categories: [] },
+      { id: 'no-picante', text: 'Sin picantito, soy sensible 🌶️💧', emoji: '🌶️', categories: [] },
+      { id: 'no-carne-roja', text: 'Hoy sin carnita roja 🥩🚫', emoji: '🥩', categories: [] },
+      { id: 'no-frito', text: 'Evitemos lo muy frito 🍳', emoji: '🍳', categories: [] },
+      { id: 'no-lacteos', text: 'Sin lácteos (barriguita sensible) 🥛', emoji: '🥛', categories: [] },
+      { id: 'no-sopas', text: 'Nada muy caldoso hoy 🥣', emoji: '🥣', categories: [] },
+      { id: 'sin-restriccion', text: 'Todo vale, ¡sorpréndeme! ✨', emoji: '🙅', categories: [] }
+    ]
+  }
+];
+
 // Function to get random categories based on user selections
 export const getRecommendedCategories = (selectedOptions: string[]): FoodCategory[] => {
   const allCategories: string[] = [];
-  
+
   selectedOptions.forEach(optionId => {
-    dailyQuestions.forEach(question => {
+    assistedQuestions.forEach(question => {
       const option = question.options.find(opt => opt.id === optionId);
       if (option) {
         allCategories.push(...option.categories);
