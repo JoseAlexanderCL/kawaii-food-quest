@@ -20,7 +20,7 @@ export const KawaiiHeader = ({
             <img 
               src={kawaiiKitten} 
               alt="Gatito kawaii mascota" 
-              className="w-24 h-24 animate-kawaii-bounce drop-shadow-floating"
+              className="w-24 h-32 animate-kawaii-bounce drop-shadow-floating"
             />
             <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-kawaii-vivid-yellow animate-kawaii-wiggle" />
             <Heart className="absolute -bottom-1 -left-2 w-4 h-4 text-kawaii-crimson animate-kawaii-pulse" />
