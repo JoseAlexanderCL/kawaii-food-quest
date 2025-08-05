@@ -1,4 +1,4 @@
-import { assistedQuestions, foodCategories, FoodCategory } from "@/data/questions";
+import { foodCategories, Question } from "@/data/questions";
 
 export type CategoryId = (typeof foodCategories)[number]["id"];
 
@@ -47,16 +47,19 @@ const DAIRY_CATEGORIES: CategoryId[] = [
 ];
 
 /**
- * Recommend top 3 categories based on user selected options.
+ * Recommend top 3 food category IDs based on user selected answers.
  * Applies base scoring, thematic boosts, exclusions and a soft ban on dairy.
  */
-export function recommendTop3(selectedOptions: string[]): FoodCategory[] {
+export function recommendTop3(
+  selectedAnswers: Record<string, string>,
+  questions: Question[]
+): CategoryId[] {
   const scores: Record<CategoryId, number> = {};
   const excluded = new Set<CategoryId>();
 
-  selectedOptions.forEach((optionId) => {
+  Object.values(selectedAnswers).forEach((optionId) => {
     // Base scores from question option categories
-    assistedQuestions.forEach((question) => {
+    questions.forEach((question) => {
       const option = question.options.find((o) => o.id === optionId);
       if (option) {
         option.categories.forEach((cat) => {
@@ -83,7 +86,7 @@ export function recommendTop3(selectedOptions: string[]): FoodCategory[] {
   });
 
   // Soft ban for dairy heavy categories
-  if (selectedOptions.includes("no-lacteos")) {
+  if (Object.values(selectedAnswers).includes("no-lacteos")) {
     DAIRY_CATEGORIES.forEach((cat) => {
       scores[cat] = (scores[cat] || 0) - 2; // Penalty instead of exclusion
     });
@@ -96,7 +99,7 @@ export function recommendTop3(selectedOptions: string[]): FoodCategory[] {
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
-    .map((item) => item.cat);
+    .map((item) => item.cat.id as CategoryId);
 
   return ranked;
 }
