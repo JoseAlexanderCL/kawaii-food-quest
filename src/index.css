@@ -8,35 +8,57 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Kawaii Color Palette - Light Mode */
+    --background: 320 100% 98%; /* Very light pink */
+    --foreground: 342 15% 15%; /* Eerie Black variant */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 320 60% 95%; /* Light pink card */
+    --card-foreground: 342 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 320 100% 98%;
+    --popover-foreground: 342 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 346 82% 57%; /* Spanish Crimson */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 195 100% 90%; /* Soft blue */
+    --secondary-foreground: 342 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 165 60% 88%; /* Mint green */
+    --muted-foreground: 342 15% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 60 100% 87%; /* Vivid Yellow pale */
+    --accent-foreground: 342 15% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --kawaii-pink: 320 100% 90%; /* Baby pink */
+    --kawaii-blue: 195 100% 85%; /* Soft blue */
+    --kawaii-mint: 165 60% 85%; /* Mint green */
+    --kawaii-yellow: 60 100% 90%; /* Pale yellow */
+    --kawaii-lavender: 270 60% 90%; /* Lavender */
+    --kawaii-crimson: 346 82% 57%; /* Spanish Crimson */
+    --kawaii-vivid-yellow: 60 100% 68%; /* Vivid Yellow */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 346 82% 57%;
+    --destructive-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --border: 320 40% 85%;
+    --input: 320 40% 85%;
+    --ring: 346 82% 57%;
+
+    --radius: 1rem; /* More rounded for kawaii */
+
+    /* Kawaii Gradients */
+    --gradient-kawaii: linear-gradient(135deg, hsl(var(--kawaii-pink)), hsl(var(--kawaii-blue)));
+    --gradient-food: linear-gradient(135deg, hsl(var(--kawaii-yellow)), hsl(var(--kawaii-mint)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--kawaii-crimson)), hsl(var(--kawaii-vivid-yellow)));
+
+    /* Kawaii Shadows */
+    --shadow-kawaii: 0 8px 32px hsl(var(--kawaii-pink) / 0.3);
+    --shadow-floating: 0 12px 40px hsl(var(--kawaii-blue) / 0.25);
+
+    /* Kawaii Animations */
+    --bounce-duration: 0.8s;
+    --wiggle-duration: 1.2s;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +78,42 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Kawaii Dark Mode - softer darks with pink tints */
+    --background: 320 15% 8%; /* Dark pink-tinted */
+    --foreground: 320 20% 90%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 320 15% 12%;
+    --card-foreground: 320 20% 90%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 320 15% 8%;
+    --popover-foreground: 320 20% 90%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 346 82% 65%; /* Brighter crimson for dark mode */
+    --primary-foreground: 320 15% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 195 60% 25%; /* Darker blue */
+    --secondary-foreground: 320 20% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 165 30% 20%; /* Darker mint */
+    --muted-foreground: 320 10% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 60 80% 75%; /* Brighter yellow for contrast */
+    --accent-foreground: 320 15% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --kawaii-pink: 320 60% 25%;
+    --kawaii-blue: 195 60% 30%;
+    --kawaii-mint: 165 40% 25%;
+    --kawaii-yellow: 60 80% 70%;
+    --kawaii-lavender: 270 40% 30%;
+    --kawaii-crimson: 346 82% 65%;
+    --kawaii-vivid-yellow: 60 100% 75%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive: 346 82% 65%;
+    --destructive-foreground: 320 15% 8%;
+
+    --border: 320 20% 20%;
+    --input: 320 20% 20%;
+    --ring: 346 82% 65%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -101,5 +132,23 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+}
+
+/* Additional kawaii styles */
+@layer utilities {
+  .text-gradient-kawaii {
+    background: var(--gradient-kawaii);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
