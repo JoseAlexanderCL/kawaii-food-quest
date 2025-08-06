@@ -14,7 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      user_log: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          id: string
+          mode: string
+          option_id: string | null
+          question_id: string | null
+          session_id: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          mode: string
+          option_id?: string | null
+          question_id?: string | null
+          session_id: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          mode?: string
+          option_id?: string | null
+          question_id?: string | null
+          session_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

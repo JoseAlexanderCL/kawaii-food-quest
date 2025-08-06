@@ -6,6 +6,9 @@ import { KawaiiButton } from "@/components/KawaiiButton";
 import { KawaiiRuleta } from "@/components/KawaiiRuleta";
 import { assistedQuestions, FoodCategory, foodCategories } from "@/data/questions";
 import { recommendTop3 } from "@/lib/recommend";
+import { getSessionId } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { RotateCcw, ChefHat, Dice6, Heart } from "lucide-react";
 
 type AppState = 'welcome' | 'mode-selection' | 'ruleta' | 'question' | 'results';
@@ -17,6 +20,7 @@ const Index = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [recommendedCategories, setRecommendedCategories] = useState<FoodCategory[]>([]);
+  const { toast } = useToast();
 
   const handleStartApp = () => {
     setCurrentState('mode-selection');
@@ -33,7 +37,7 @@ const Index = () => {
     }
   };
 
-  const handleOptionSelect = (optionId: string) => {
+  const handleOptionSelect = async (optionId: string) => {
     const questionId = assistedQuestions[currentQuestionIndex].id;
 
     if (currentQuestionIndex === 0 && optionId === 'nada') {
@@ -42,6 +46,35 @@ const Index = () => {
 
     const newSelectedAnswers = { ...selectedAnswers, [questionId]: optionId };
     setSelectedAnswers(newSelectedAnswers);
+
+    // Persist choice to Supabase
+    try {
+      const sessionId = getSessionId();
+      const { error } = await supabase
+        .from('user_log')
+        .insert({
+          session_id: sessionId,
+          mode: 'asistido',
+          question_id: questionId,
+          option_id: optionId
+        });
+
+      if (error) {
+        console.error('Error saving choice:', error);
+        toast({
+          title: "Error",
+          description: "No se pudo guardar tu respuesta, pero puedes continuar.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error saving choice:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo guardar tu respuesta, pero puedes continuar.",
+        variant: "destructive",
+      });
+    }
 
     const nextIndex = currentQuestionIndex + 1;
     if (nextIndex < assistedQuestions.length) {
@@ -56,7 +89,35 @@ const Index = () => {
     }
   };
 
-  const handleRuletaResult = (category: FoodCategory) => {
+  const handleRuletaResult = async (category: FoodCategory) => {
+    // Persist ruleta result to Supabase
+    try {
+      const sessionId = getSessionId();
+      const { error } = await supabase
+        .from('user_log')
+        .insert({
+          session_id: sessionId,
+          mode: 'ruleta',
+          category_id: category.id
+        });
+
+      if (error) {
+        console.error('Error saving ruleta result:', error);
+        toast({
+          title: "Error",
+          description: "No se pudo guardar el resultado, pero puedes continuar.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error saving ruleta result:', error);
+      toast({
+        title: "Error",
+        description: "No se pudo guardar el resultado, pero puedes continuar.",
+        variant: "destructive",
+      });
+    }
+
     setRecommendedCategories([category]);
     setCurrentState('results');
   };
