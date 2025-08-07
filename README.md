@@ -71,3 +71,11 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## Credenciales de Spotify
+
+1. Visita el [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+2. Inicia sesión con tu cuenta de Spotify y crea una aplicación.
+3. Dentro de la aplicación, copia el **Client ID** y añade la URL de redirección en la sección *Redirect URIs*.
+4. Guarda los cambios y usa esos valores para `VITE_SPOTIFY_CLIENT_ID` y `VITE_SPOTIFY_REDIRECT_URI` en el archivo `.env`.
+5. Para obtener un `playlist_id`, abre la playlist en Spotify, usa "Compartir > Copiar enlace" y extrae el identificador de la URL. Asigna este valor a `VITE_SPOTIFY_PLAYLIST_ID`.
