@@ -10,7 +10,7 @@ interface KawaiiHeaderProps {
 export const KawaiiHeader = ({ 
   showLogo = true, 
   title = "¿Qué comemos hoy?",
-  subtitle = "¡Hola! ¿Listo/a para elegir algo delicioso?" 
+  subtitle = "¡Hola mi amor! ¿Lista para elegir algo delicioso?" 
 }: KawaiiHeaderProps) => {
   return (
     <div className="text-center mb-8">
